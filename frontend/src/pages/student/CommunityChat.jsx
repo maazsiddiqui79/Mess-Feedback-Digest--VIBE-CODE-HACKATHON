@@ -78,7 +78,7 @@ export default function CommunityChat() {
   );
 
   return (
-    <div className="flex flex-col h-[calc(100vh-5rem)]">
+    <div className="flex flex-col h-[calc(100vh-10rem)] lg:h-[calc(100vh-5rem)]">
       <SEO 
         title="Community Discussion - Student Dining" 
         description="Engage in community meal discussions, feedback sharing, and student dining polls." 
@@ -86,7 +86,7 @@ export default function CommunityChat() {
       {/* Header */}
       <div className="mb-4 pb-4 border-b border-border">
         <p className="text-xs font-bold tracking-widest text-accent uppercase mb-1">Group Chat</p>
-        <h1 className="text-2xl font-display font-bold text-primary">Student Community</h1>
+        <h1 className="text-xl sm:text-2xl font-display font-bold text-primary">Student Community</h1>
         <p className="text-sm text-secondary">Chat, share, connect.</p>
       </div>
 

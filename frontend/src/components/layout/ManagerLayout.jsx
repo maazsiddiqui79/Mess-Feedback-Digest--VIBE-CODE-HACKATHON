@@ -1,5 +1,6 @@
+import { useState, useEffect } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
-import { LayoutDashboard, FileText, LogOut, Utensils, ShieldAlert } from 'lucide-react';
+import { LayoutDashboard, FileText, LogOut, Utensils, ShieldAlert, Menu, X } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 const NAV = [
@@ -12,6 +13,7 @@ export default function ManagerLayout() {
   const { user, logout } = useAuth();
   const navigate   = useNavigate();
   const location   = useLocation();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const navItems = (user?.role === 'ADMIN' || user?.role === 'SUPER_ADMIN')
     ? [...NAV, { name: 'Admin Control', path: '/admin', icon: ShieldAlert }]
@@ -19,10 +21,25 @@ export default function ManagerLayout() {
 
   const handleLogout = async () => { await logout(); navigate('/login'); };
 
-  return (
-    <div className="flex h-screen overflow-hidden bg-bg">
-      <aside className="w-[220px] shrink-0 flex flex-col h-full bg-surface border-r border-border">
-        <div className="px-5 pt-6 pb-5 border-b border-border">
+  // Close sidebar on route change
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [location.pathname]);
+
+  // Prevent body scroll when sidebar is open on mobile
+  useEffect(() => {
+    if (sidebarOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [sidebarOpen]);
+
+  const sidebarContent = (
+    <>
+      <div className="px-5 pt-6 pb-5 border-b border-border">
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center shadow-[0_0_12px_rgba(88,166,255,0.3)]">
               <Utensils className="w-4 h-4 text-[#0d1117]" />
@@ -32,43 +49,94 @@ export default function ManagerLayout() {
               <p className="text-[10px] text-muted mt-0.5 uppercase tracking-widest">Manager</p>
             </div>
           </div>
-        </div>
-
-        <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
-          {navItems.map(item => {
-            const active = item.exact
-              ? location.pathname === item.path
-              : location.pathname.startsWith(item.path);
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 ${
-                  active ? 'nav-active' : 'nav-idle'
-                }`}
-              >
-                <Icon className="w-[18px] h-[18px] flex-shrink-0" />
-                <span>{item.name}</span>
-                {active && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-accent animate-pulse2" />}
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="px-3 py-4 border-t border-border">
           <button
-            onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-secondary hover:bg-danger/10 hover:text-danger transition-all duration-150"
+            onClick={() => setSidebarOpen(false)}
+            className="lg:hidden p-1.5 rounded-lg text-secondary hover:text-primary hover:bg-surface-2 transition-colors"
+            aria-label="Close menu"
           >
-            <LogOut className="w-[18px] h-[18px]" />
-            Sign Out
+            <X className="w-5 h-5" />
           </button>
         </div>
+      </div>
+
+      <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
+        {navItems.map(item => {
+          const active = item.exact
+            ? location.pathname === item.path
+            : location.pathname.startsWith(item.path);
+          const Icon = item.icon;
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 ${
+                active ? 'nav-active' : 'nav-idle'
+              }`}
+            >
+              <Icon className="w-[18px] h-[18px] flex-shrink-0" />
+              <span>{item.name}</span>
+              {active && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-accent animate-pulse2" />}
+            </Link>
+          );
+        })}
+      </nav>
+
+      <div className="px-3 py-4 border-t border-border">
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-secondary hover:bg-danger/10 hover:text-danger transition-all duration-150"
+        >
+          <LogOut className="w-[18px] h-[18px]" />
+          Sign Out
+        </button>
+      </div>
+    </>
+  );
+
+  return (
+    <div className="flex h-screen overflow-hidden bg-bg">
+      {/* Mobile Header */}
+      <div className="fixed top-0 left-0 right-0 z-40 lg:hidden bg-surface border-b border-border">
+        <div className="flex items-center justify-between px-4 h-14">
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center shadow-[0_0_12px_rgba(88,166,255,0.3)]">
+              <Utensils className="w-3.5 h-3.5 text-[#0d1117]" />
+            </div>
+            <span className="text-sm font-bold text-primary font-display">MessMind</span>
+          </div>
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="p-2 rounded-lg text-secondary hover:text-primary hover:bg-surface-2 transition-colors"
+            aria-label="Open menu"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+
+      {/* Backdrop overlay (mobile only) */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden animate-fade-in"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={`
+          fixed top-0 left-0 z-50 h-full w-[260px] flex flex-col bg-surface border-r border-border
+          transform transition-transform duration-300 ease-in-out
+          lg:static lg:w-[220px] lg:shrink-0 lg:translate-x-0
+          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        `}
+      >
+        {sidebarContent}
       </aside>
 
+      {/* Main */}
       <main className="flex-1 h-full overflow-y-auto bg-bg">
-        <div className="w-full h-full p-6 md:p-8 animate-fade-in">
+        <div className="w-full h-full p-4 pt-[70px] sm:p-5 sm:pt-[70px] lg:p-6 lg:pt-6 xl:p-8 xl:pt-8 animate-fade-in">
           <Outlet />
         </div>
       </main>

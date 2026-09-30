@@ -15,6 +15,8 @@
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
   }
 
   h1, h2, h3, h4, h5 {
@@ -26,6 +28,11 @@
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
   ::-webkit-scrollbar-thumb:hover { background: #484f58; }
+
+  /* Prevent iOS rubber-banding on inner scroll containers */
+  .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 @layer components {

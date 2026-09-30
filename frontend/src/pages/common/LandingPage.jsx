@@ -27,7 +27,7 @@ const LandingPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <main className="flex-1 flex flex-col items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 pb-32">
+      <main className="flex-1 flex flex-col items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 md:pt-20 pb-16 sm:pb-24 md:pb-32">
         
         {/* Background Decorations */}
         <div className="absolute top-10 left-10 w-64 h-64 bg-accent/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
@@ -39,14 +39,14 @@ const LandingPage = () => {
             Elevating campus dining experiences
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-primary leading-tight font-display">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-primary leading-tight font-display">
             Your Voice, <br className="hidden md:block"/>
             <span className="text-accent">
               Better Food.
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-secondary max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-secondary max-w-2xl mx-auto leading-relaxed">
             MessMind is the ultimate feedback loop between students and mess management. Rate meals, share ideas, and help build a healthier, tastier community.
           </p>
           
@@ -61,7 +61,7 @@ const LandingPage = () => {
         </div>
 
         {/* Features Section */}
-        <div className="max-w-6xl w-full mt-32 grid grid-cols-1 md:grid-cols-3 gap-8 z-10">
+        <div className="max-w-6xl w-full mt-16 sm:mt-24 md:mt-32 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 z-10">
           <div className="bg-card p-8 rounded-3xl border border-border shadow-sm hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6">
               <Star className="w-6 h-6" />

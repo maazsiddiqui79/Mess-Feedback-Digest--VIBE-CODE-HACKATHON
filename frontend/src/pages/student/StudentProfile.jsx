@@ -103,7 +103,7 @@ const StudentProfile = () => {
         {/* Hostel Details */}
         <div className="bg-[#1a1d27] border border-[#2a2d3e] rounded-2xl p-6 shadow-md">
           <p className="text-[10px] font-bold text-[#8b90a7] uppercase tracking-widest mb-5">Hostel Details</p>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="text-xs font-semibold text-[#8b90a7] block mb-2">Hostel / Block</label>
               <input type="text" name="hostel" value={profile.hostel || ''} onChange={handleChange}

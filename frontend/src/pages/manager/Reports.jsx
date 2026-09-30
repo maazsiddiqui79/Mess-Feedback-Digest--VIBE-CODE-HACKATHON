@@ -82,7 +82,7 @@ const DigestCard = ({ digest }) => {
           </div>
 
           {/* Issues & Positives */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-danger/5 rounded-xl p-4 border border-danger/15">
               <div className="flex items-center gap-2 mb-3">
                 <AlertTriangle className="w-4 h-4 text-danger" />
@@ -224,7 +224,7 @@ export default function Reports() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <p className="text-xs font-bold tracking-widest text-accent uppercase mb-1">AI Engine</p>
-          <h1 className="text-3xl font-display font-bold text-primary">Daily Digests</h1>
+          <h1 className="text-2xl sm:text-3xl font-display font-bold text-primary">Daily Digests</h1>
           <p className="text-sm text-secondary mt-1">AI-generated summaries of daily mess operations.</p>
         </div>
         <button onClick={handleGenerate} disabled={generating || counting} className="btn-primary">

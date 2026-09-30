@@ -30,7 +30,7 @@ const FeedbackModal = ({ fb, onClose }) => (
         </button>
       </div>
       <div className="p-5 space-y-4">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="bg-bg rounded-xl p-4 border border-border">
             <p className="label mb-1">Student</p>
             <p className="text-sm text-primary font-medium truncate mt-1">{fb.student_email}</p>
@@ -126,7 +126,7 @@ export default function Dashboard() {
           <div className="h-8 w-48 bg-surface-2 rounded animate-pulse" />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <StatCardSkeleton />
         <StatCardSkeleton />
         <StatCardSkeleton />
@@ -148,10 +148,10 @@ export default function Dashboard() {
 
       <div className="space-y-6 animate-fade-in">
         {/* Header */}
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
           <div>
             <p className="text-xs font-bold tracking-widest text-accent uppercase mb-1">Operations</p>
-            <h1 className="text-3xl font-display font-bold text-primary">Today's Overview</h1>
+            <h1 className="text-2xl sm:text-3xl font-display font-bold text-primary">Today's Overview</h1>
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 bg-success/10 border border-success/25 rounded-full">
             <Activity className="w-3.5 h-3.5 text-success animate-pulse2" />
@@ -160,7 +160,7 @@ export default function Dashboard() {
         </div>
 
         {/* Stat Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
             { label:'Total Feedback',  value: stats.total_today,            icon: Users,        color:'#58a6ff' },
             { label:'Average Rating',  value:`${stats.avg_rating} / 5.0`,   icon: Star,         color:'#d29922' },

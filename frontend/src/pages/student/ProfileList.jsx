@@ -35,7 +35,7 @@ const ProfileList = () => {
         <div>
           <div className="flex items-center space-x-3 mb-2">
             <div className="w-1 h-6 bg-accent"></div>
-            <h1 className="text-4xl font-display font-bold text-white tracking-tight">Community.</h1>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white tracking-tight">Community.</h1>
           </div>
           <p className="text-sm text-secondary font-medium tracking-wide">CONNECT WITH OTHER STUDENTS.</p>
         </div>
@@ -57,7 +57,7 @@ const ProfileList = () => {
       {loading ? (
         <div className="p-8 text-center text-muted">Loading profiles...</div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredProfiles.length > 0 ? (
             filteredProfiles.map((p, idx) => (
               <div key={idx} className="card group hover:border-accent/30 transition-all duration-300">

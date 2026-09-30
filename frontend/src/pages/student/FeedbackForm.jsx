@@ -122,7 +122,7 @@ export default function FeedbackForm() {
       {/* Header */}
       <div className="mb-7">
         <p className="text-xs font-bold tracking-widest text-accent uppercase mb-1">Student Feedback</p>
-        <h1 className="text-3xl font-display font-bold text-primary">Rate Your Meal</h1>
+        <h1 className="text-2xl sm:text-3xl font-display font-bold text-primary">Rate Your Meal</h1>
         <p className="text-sm text-secondary mt-1">Your honest feedback drives real improvements.</p>
       </div>
 
