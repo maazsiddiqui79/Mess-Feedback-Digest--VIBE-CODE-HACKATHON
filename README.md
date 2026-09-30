@@ -22,7 +22,7 @@ A full-stack platform that transforms hostel mess feedback into structured data,
 > **Backend Framework:** Django REST Framework  
 > **Status:** 🟢 Live
 
-**[🔴 Watch Demo Video](https://raw.githubusercontent.com/maazsiddiqui79/Mess-Feedback-Digest--VIBE-CODE-HACKATHON/main/docs/MessMind.mp4)**
+**[🔴 Watch Demo Video](https://raw.githubusercontent.com/maazsiddiqui79/Mess-Feedback-Digest--VIBE-CODE-HACKATHON/main/docs/MessMind.mp4)** (docs/MessMind.mp4)
 
 ---
 
