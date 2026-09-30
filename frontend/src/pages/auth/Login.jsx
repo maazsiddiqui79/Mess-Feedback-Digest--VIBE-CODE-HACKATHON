@@ -37,8 +37,10 @@ const Login = () => {
         setError(
           'Cannot connect to backend server. Please make sure the backend is running on http://localhost:8000.'
         );
+      } else if (err.response?.status === 401) {
+        setError('Incorrect email or password. Please try again.');
       } else {
-        setError(err.response?.data?.detail || 'Invalid email or password.');
+        setError(err.response?.data?.detail || 'An error occurred during login. Please try again.');
       }
     } finally {
       setIsSubmitting(false);
@@ -66,7 +68,7 @@ const Login = () => {
         {/* Demo Quick Logins */}
         <div className="mb-6 p-3 rounded-xl bg-surface border border-border">
           <p className="text-[11px] font-semibold text-muted uppercase tracking-wider mb-2 text-center">
-            Quick Demo Login
+            Quick Demo Login (Temporary Use)
           </p>
 
           <div className="grid grid-cols-3 gap-2">

@@ -62,7 +62,7 @@ def analyze_feedback_task(feedback_id):
             "sentiment": "POSITIVE" | "NEUTRAL" | "NEGATIVE" | "MIXED",
             "severity": "LOW" | "MEDIUM" | "HIGH" | "CRITICAL",
             "themes": ["theme1", "theme2"],
-            "summary": "A very concise 1-sentence summary",
+            "summary": "A detailed 1-paragraph summary of the student's feedback and sentiment",
             "action_required": true,
             "action_title": "Short title if action_required is true, else null",
             "action_description": "Detailed description if action is required, else null"
@@ -186,12 +186,13 @@ def generate_daily_digest_task():
         logger.info("No feedback today, skipping digest.")
         return
     
+    avg_rating = sum(f.rating for f in feedbacks) / len(feedbacks)
+
+    # Limit to top 20 to prevent context limit errors and JSON failures
     data_points = []
-    for f in feedbacks:
+    for f in list(feedbacks)[:20]:
         sentiment = f.analysis.sentiment if hasattr(f, 'analysis') else "UNKNOWN"
         data_points.append(f"Meal: {f.meal.name} | Rating: {f.rating}/5 | Tags: {f.issue_tags + f.positive_tags} | Remark: {f.custom_remark} | Sentiment: {sentiment}")
-
-    avg_rating = sum(f.rating for f in feedbacks) / len(feedbacks)
 
     result = None
     if client:
@@ -204,7 +205,7 @@ def generate_daily_digest_task():
 
         Return ONLY a valid JSON object matching this schema:
         {{
-            "overview": "A 2-3 sentence overview of the day.",
+            "overview": "A detailed 1-paragraph overview of the day's feedback.",
             "top_issues": ["Issue 1", "Issue 2"],
             "positive_signals": ["Positive 1", "Positive 2"],
             "recommendations": ["Rec 1", "Rec 2"]
@@ -218,10 +219,12 @@ def generate_daily_digest_task():
                     {"role": "user", "content": prompt}
                 ],
                 model="openai/gpt-oss-20b",
-                response_format={"type": "json_object"},
                 temperature=0.2,
             )
-            result = json.loads(response.choices[0].message.content)
+            raw_text = response.choices[0].message.content
+            # basic clean up in case of markdown blocks
+            raw_text = raw_text.replace("```json", "").replace("```", "").strip()
+            result = json.loads(raw_text)
         except Exception as e:
             logger.error(f"Error generating daily digest via Groq: {e}")
 
