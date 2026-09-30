@@ -6,7 +6,7 @@ import SEO from '../../components/common/SEO';
 
 // Media files are served by Django at http://localhost:8000
 // The API returns relative paths like /media/... so we prefix them.
-const MEDIA_BASE = 'http://localhost:8000';
+const MEDIA_BASE = import.meta.env.VITE_MEDIA_URL || 'http://localhost:8000';
 const mediaUrl = (url) => {
   if (!url) return '';
   if (url.startsWith('http')) return url;

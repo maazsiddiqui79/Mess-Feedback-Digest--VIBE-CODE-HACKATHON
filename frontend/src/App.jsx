@@ -19,10 +19,13 @@ import NotFound from './pages/common/NotFound';
 // Mock components for foundation setup
 
 
+import LandingPage from './pages/common/LandingPage';
+
 function App() {
   return (
     <AuthProvider>
       <Routes>
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         
         {/* Student Routes */}

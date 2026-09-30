@@ -6,7 +6,7 @@ import SEO from '../../components/common/SEO';
 import BackToTop from '../../components/common/BackToTop';
 import { StatCardSkeleton, TableRowSkeleton } from '../../components/common/LoadingSkeleton';
 
-const MEDIA_BASE = 'http://localhost:8000';
+const MEDIA_BASE = import.meta.env.VITE_MEDIA_URL || 'http://localhost:8000';
 const mediaUrl = u => (!u || u.startsWith('http')) ? u : `${MEDIA_BASE}${u}`;
 
 const StarRow = ({ rating }) => (
