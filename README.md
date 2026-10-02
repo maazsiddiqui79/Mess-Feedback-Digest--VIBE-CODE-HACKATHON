@@ -21,6 +21,7 @@ A full-stack platform that transforms hostel mess feedback into structured data,
 > **Backend Deployment:** Render  
 > **Backend Framework:** Django REST Framework  
 > **Status:** 🟢 Live
+> **Note for Judges:** The backend of this project is deployed on Render Free Tier, which does not provide persistent file storage. Therefore, images/videos uploaded on the live deployed website may not be saved permanently. The upload and display functionality is fully implemented and works correctly when running locally, as demonstrated in the included video. 
 
 **[🔴 Watch Demo Video](https://raw.githubusercontent.com/maazsiddiqui79/Mess-Feedback-Digest--VIBE-CODE-HACKATHON/main/docs/MessMind.mp4)** (docs/MessMind.mp4)
 
